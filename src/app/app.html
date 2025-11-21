@@ -1,0 +1,220 @@
+<div class="main-base-form">
+  <div class="order-result order-result-success" *ngIf="formValues.popup_show" >
+    <div class="popup-mybox">Спасибо за заказ.</div>
+    <div class="popup-mybox">Мы скоро свяжемся с Вами.</div>
+    <div class="popup-mybottom-box">
+      <button type="button" class="porder-success__botton" id="order-success-close">OK</button>
+    </div>
+  </div>
+
+
+<div *ngIf="formValues.form_show">
+  <div class="block block_pink">
+    <header class="header header_top ">
+      <div class="logo logo-top"><img alt="logo" class="logo__img" src="./images/logo.png"/></div>
+
+
+      <nav class="menu" id="menu">
+
+        <div class="menu__close">
+          <svg style="enable-background:new 0 0 492 492;" version="1.1"
+               viewBox="0 0 492 492" x="0px" xml:space="preserve"
+               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<g>
+	<g>
+		<path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
+			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872
+			c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052
+			L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116
+			c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952
+			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116
+			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z"/>
+	</g>
+</g>
+</svg>
+        </div>
+
+        <ul class="menu__list">
+          <li class="menu__item"><a class="menu__link" href="#">Пироженки</a></li>
+          <li class="menu__item"><a class="menu__link" href="#">О нас</a></li>
+          <li class="menu__item"><a class="menu__link" href="#">Оформить заказ</a></li>
+        </ul>
+
+
+      </nav>
+
+
+      <div class="header_phone header_phone_top">+375 (29) 368-98-68</div>
+      <div class="header-menutri" id="header-menutri">
+        <svg
+          height="22px"
+          width="40px"
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path d="M0.000,-0.000 L39.1000,-0.000 L39.1000,1.1000 L0.000,1.1000 L0.000,-0.000 Z" fill="rgb(130, 19, 40)"
+                fill-rule="evenodd"/>
+          <path d="M0.000,10.000 L39.1000,10.000 L39.1000,12.000 L0.000,12.000 L0.000,10.000 Z" fill="rgb(130, 19, 40)"
+                fill-rule="evenodd"/>
+          <path d="M0.000,19.1000 L39.1000,19.1000 L39.1000,21.1000 L0.000,21.1000 L0.000,19.1000 Z"
+                fill="rgb(130, 19, 40)"
+                fill-rule="evenodd"/>
+        </svg>
+      </div>
+    </header>
+    <section class="container container_top">
+
+      <div class="block-pnk2-info">
+
+        <div class="block_pink__title">Мягкие французские пироженки Macaroons</div>
+        <div class="block_pink__descrip">Побалуйте себя и своих близких самыми вкусными и ароматными домашними
+          пироженками Macaroon!
+        </div>
+        <div class="block_pink__choicebtn">
+          <button class="button blockpinkchoice__button" (click)="scrollTo(menuChoice)">Выбрать макарун</button>
+        </div>
+      </div>
+
+      <div class="container-top__img"><img alt="img1" class="container-top__img" src="./images/img1.png"/></div>
+
+    </section>
+  </div>
+
+  <section class="block block_text">
+    <div class="container container__baseinfo">
+      <div class="baseinfo-text">
+        <div class="baseinfo-text-caption">Мы печём для вас вкуснейшие макаруны уже более 10 лет</div>
+        <div class="baseinfo-text-dsc">Все пироженки мы готовим только из натуральных и качественных продуктов,
+          без консервантов, ароматизаторов, красителей. Используем в приготовлении сливочное масло 82,5%, без
+          дрожжей, маргарина, разрыхлителей и улучшителей муки.
+        </div>
+
+      </div>
+      <div class="baseinfo-image">
+        <img alt="img1" class="binfo-image__img" src="images/img2.png"/>
+      </div>
+    </div>
+  </section>
+  <div class="block block_text  advantages">
+    <div class="advantages-item" *ngFor="let adv of advantages;  let i = index;">
+      <div class="advantages-item__number">
+        <div class="advnumber_circle">
+          <div class="advnumber_circle__number">{{ i + 1 }}</div>
+        </div>
+        <div class="advnumber_circle__caption">{{ adv.title }}</div>
+        <div class="advnumber_circle__text">{{ adv.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block block_pink" #menuChoice>
+    <div class="choice-container">
+      <div class="choice-container__title">Выберите свой макарун</div>
+      <div class="choice-itemslist">
+        <div class="choice-item" *ngFor="let mcr of macaroons;  let i = index;">
+          <div class="choice-item__img">
+            <img alt="img1" class="choice-item__image" src="./images/{{mcr.image}}" alt="Macaroon {{i+1}}"/>
+          </div>
+          <div class="choice-item__info">
+            <div class="choice-item__caption">{{ mcr.caption }}</div>
+            <div class="choice-order">
+              <div class="choice-order__price ">
+                <div class="chorder-price__dtl">{{ mcr.price_kol }} шт.</div>
+                <div class="chorder-price__dtl">{{ mcr.price_sum }}</div>
+              </div>
+              <div class="choice-order__action">
+                <button class="button choice-order__action-btn product__btn" (click)="choiceMacaroon(mcr,orderElement)">
+                  Заказать
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="block block_purshase order" #orderElement>
+    <div class="purshase-container">
+      <div class="purshase__images">
+        <div class="pimageleft__image">
+          <img alt="purhs-image" class="pimageleft__img" src="images/pursh_img.png"/>
+        </div>
+      </div>
+      <div class="purshase__order">
+        <div class="purshord__title">Закажите макарун!</div>
+        <div class="purshord__text">Выберите понравившийся макарун, заполните форму и ожидайте звонка нашего
+          пекаря!
+        </div>
+        <div class="purshord__choice">
+          <div class="pchoice-caption">Ваш выбор</div>
+          <div class="pchoice-input">
+            <input class="pchoice-input__text" id="product-input" placeholder="Напишите, что хотите заказать..."
+                   type="text" [(ngModel)]="formValues.productTitle"/>
+            <div class="error-input" *ngIf="formValues.err_name">Необходимо ввести выбранный макарун...</div>
+          </div>
+        </div>
+        <div class="purshord__choice purshord__choice_bottom">
+          <div class="pchoice-caption">Заполните данные для заказа</div>
+          <div class="pchoice-input">
+            <input class="pchoice-input__text" id="name-input" placeholder="Ваше имя" type="text"
+                   [(ngModel)]="formValues.name"/>
+            <div class="error-input" *ngIf="formValues.err_name">Необходимо ввести Ваше имя...</div>
+          </div>
+          <div class="pchoice-input">
+            <input class="pchoice-input__text" id="phone-input" placeholder="+375 (__) ___ - __ - __" type="text"
+                   [(ngModel)]="formValues.phone"/>
+            <div class="error-input" *ngIf="formValues.err_phone">Необходимо ввести телефон...</div>
+          </div>
+          <div class="pchoice-input pchoice-input__btn">
+            <button type="button" class="pchoice-input__botton" (click)="createOrder()">Оформить заказ</button>
+          </div>
+        </div>
+      </div>
+      <div class="pimageleft__icon">
+        <img alt="left_icon" class="pimageleft__iconimg" src="images/picon_left.png"/>
+      </div>
+      <div class="pimageright__icon">
+        <img alt="right_icon" class="pimageright__iconimg" src="images/picon_right.png"/>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="block  block_footer">
+    <div class="footer-container">
+      <div class="logo footer-logo"><img alt="logo" class="logo__img" src="images/logo.png"/></div>
+      <div class="logo__copyright">Все права защищены, 2020</div>
+      <div class="footer-instagram">
+        <div class="instagram__logo">
+          <img alt="instagram" class="instagram__logo__img" src="images/instagram.png"/>
+        </div>
+      </div>
+      <div class="instagram__text"><a class="footer-instagram__link" href="#">Мы в Instagram</a></div>
+      <div class="header_phone footer-phone">+375 (29) 368-98-68</div>
+    </div>
+
+  </footer>
+</div>
+
+  <div *ngIf="showPresent" class="present__image">
+    <img alt="present" class="present__img" src="images/present.png"/>
+
+    <div class="presentdiv__text">
+      <div class="present__base-ramka">
+        <div class="present-ramka__ugol"></div>
+      </div>
+      <div class="present__text">Оформите заказ и получите подарок!</div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<!--<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="node_modules/jquery/dist/jquery.js"></script>-->
+<!--<script src="node_modules/jquery/dist/jquery.slim.js"></script>-->
+<!--<script src="scripts/jquery-3.7.1.js"></script>-->
+<!--<script src="scripts/script.js"></script>-->
+
