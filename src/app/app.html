@@ -1,21 +1,8 @@
 <div class="main-base-form">
-  <div class="order-result order-result-success" *ngIf="formValues.popup_show" >
-    <div class="popup-mybox">Спасибо за заказ.</div>
-    <div class="popup-mybox">Мы скоро свяжемся с Вами.</div>
-    <div class="popup-mybottom-box">
-      <button type="button" class="porder-success__botton" id="order-success-close">OK</button>
-    </div>
-  </div>
-
-
-<div *ngIf="formValues.form_show">
   <div class="block block_pink">
     <header class="header header_top ">
       <div class="logo logo-top"><img alt="logo" class="logo__img" src="./images/logo.png"/></div>
-
-
       <nav class="menu" id="menu">
-
         <div class="menu__close">
           <svg style="enable-background:new 0 0 492 492;" version="1.1"
                viewBox="0 0 492 492" x="0px" xml:space="preserve"
@@ -60,8 +47,13 @@
         </svg>
       </div>
     </header>
-    <section class="container container_top">
+  </div>
+  <div class="block block_pink">
 
+    <!--    <section class="container container_top">-->
+
+    <!--    <section class="container">-->
+    <div class="container_top_caption">
       <div class="block-pnk2-info">
 
         <div class="block_pink__title">Мягкие французские пироженки Macaroons</div>
@@ -74,12 +66,13 @@
       </div>
 
       <div class="container-top__img"><img alt="img1" class="container-top__img" src="./images/img1.png"/></div>
+    </div>
 
-    </section>
   </div>
 
   <section class="block block_text">
-    <div class="container container__baseinfo">
+    <!--    container-->
+    <div class=" container__baseinfo">
       <div class="baseinfo-text">
         <div class="baseinfo-text-caption">Мы печём для вас вкуснейшие макаруны уже более 10 лет</div>
         <div class="baseinfo-text-dsc">Все пироженки мы готовим только из натуральных и качественных продуктов,
@@ -89,105 +82,133 @@
 
       </div>
       <div class="baseinfo-image">
-        <img alt="img1" class="binfo-image__img" src="images/img2.png"/>
+        <img alt="img1" class="binfo-image__img" src="./images/img2.png"/>
       </div>
     </div>
   </section>
   <div class="block block_text  advantages">
-    <div class="advantages-item" *ngFor="let adv of advantages;  let i = index;">
-      <div class="advantages-item__number">
-        <div class="advnumber_circle">
-          <div class="advnumber_circle__number">{{ i + 1 }}</div>
-        </div>
-        <div class="advnumber_circle__caption">{{ adv.title }}</div>
-        <div class="advnumber_circle__text">{{ adv.description }}
+
+    @for (adv of advantages; track $index) {
+      <div class="advantages-item">
+        <div class="advantages-item__number">
+          <div class="advnumber_circle">
+            <div class="advnumber_circle__number">{{ $index + 1 }}</div>
+          </div>
+          <div class="advnumber_circle__caption">{{ adv.title }}</div>
+          <div class="advnumber_circle__text">{{ adv.description }}
+          </div>
         </div>
       </div>
-    </div>
+    }
   </div>
 
   <section class="block block_pink" #menuChoice>
     <div class="choice-container">
       <div class="choice-container__title">Выберите свой макарун</div>
       <div class="choice-itemslist">
-        <div class="choice-item" *ngFor="let mcr of macaroons;  let i = index;">
-          <div class="choice-item__img">
-            <img alt="img1" class="choice-item__image" src="./images/{{mcr.image}}" alt="Macaroon {{i+1}}"/>
-          </div>
-          <div class="choice-item__info">
-            <div class="choice-item__caption">{{ mcr.caption }}</div>
-            <div class="choice-order">
-              <div class="choice-order__price ">
-                <div class="chorder-price__dtl">{{ mcr.price_kol }} шт.</div>
-                <div class="chorder-price__dtl">{{ mcr.price_sum }}</div>
-              </div>
-              <div class="choice-order__action">
-                <button class="button choice-order__action-btn product__btn" (click)="choiceMacaroon(mcr,orderElement)">
-                  Заказать
-                </button>
+
+        @for (mcr of macaroons; track $index) {
+          <div class="choice-item">
+            <div class="choice-item__img">
+              <img class="choice-item__image" src="./images/{{mcr.image}}" alt="Macaroon {{$index+1}}"/>
+            </div>
+            <div class="choice-item__info">
+              <div class="choice-item__caption">{{ mcr.caption }}</div>
+              <div class="choice-order">
+                <div class="choice-order__price ">
+                  <div class="chorder-price__dtl">{{ mcr.price_kol.toString() }} шт.</div>
+                  <div class="chorder-price__dtl">{{ mcr.price_sum.toFixed(2).replace('.', ',') }} руб.</div>
+                </div>
+                <div class="choice-order__action">
+                  <button class="button choice-order__action-btn product__btn"
+                          (click)="choiceMacaroon(mcr,orderElement)">
+                    Заказать
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-
-        </div>
-
+        }
       </div>
     </div>
   </section>
   <section class="block block_purshase order" #orderElement>
+
+
     <div class="purshase-container">
       <div class="purshase__images">
         <div class="pimageleft__image">
-          <img alt="purhs-image" class="pimageleft__img" src="images/pursh_img.png"/>
+          <img alt="purhs-image" class="pimageleft__img" src="./images/pursh_img.png"/>
         </div>
-      </div>
-      <div class="purshase__order">
-        <div class="purshord__title">Закажите макарун!</div>
-        <div class="purshord__text">Выберите понравившийся макарун, заполните форму и ожидайте звонка нашего
-          пекаря!
-        </div>
-        <div class="purshord__choice">
-          <div class="pchoice-caption">Ваш выбор</div>
-          <div class="pchoice-input">
-            <input class="pchoice-input__text" id="product-input" placeholder="Напишите, что хотите заказать..."
-                   type="text" [(ngModel)]="formValues.productTitle"/>
-            <div class="error-input" *ngIf="formValues.err_name">Необходимо ввести выбранный макарун...</div>
-          </div>
-        </div>
-        <div class="purshord__choice purshord__choice_bottom">
-          <div class="pchoice-caption">Заполните данные для заказа</div>
-          <div class="pchoice-input">
-            <input class="pchoice-input__text" id="name-input" placeholder="Ваше имя" type="text"
-                   [(ngModel)]="formValues.name"/>
-            <div class="error-input" *ngIf="formValues.err_name">Необходимо ввести Ваше имя...</div>
-          </div>
-          <div class="pchoice-input">
-            <input class="pchoice-input__text" id="phone-input" placeholder="+375 (__) ___ - __ - __" type="text"
-                   [(ngModel)]="formValues.phone"/>
-            <div class="error-input" *ngIf="formValues.err_phone">Необходимо ввести телефон...</div>
-          </div>
-          <div class="pchoice-input pchoice-input__btn">
-            <button type="button" class="pchoice-input__botton" (click)="createOrder()">Оформить заказ</button>
-          </div>
-        </div>
-      </div>
-      <div class="pimageleft__icon">
-        <img alt="left_icon" class="pimageleft__iconimg" src="images/picon_left.png"/>
-      </div>
-      <div class="pimageright__icon">
-        <img alt="right_icon" class="pimageright__iconimg" src="images/picon_right.png"/>
       </div>
 
+      @if (formValues.form_show) {
+        <div class="purshase__order">
+          <div class="purshord__title">Закажите макарун!</div>
+          <div class="purshord__text">Выберите понравившийся макарун, заполните форму и ожидайте звонка нашего
+            пекаря!
+          </div>
+          <div class="purshord__choice">
+            <div class="pchoice-caption">Ваш выбор</div>
+            <div class="pchoice-input">
+              <input class="pchoice-input__text success-element-input" placeholder="Напишите, что хотите заказать..."
+                     #choiceMacaroon
+                     type="text" [(ngModel)]="formValues.productTitle"/>
+              @if (formValues.err_name) {
+                <div class="error-input">Необходимо ввести выбранный макарун...</div>
+              }
+            </div>
+          </div>
+          <div class="purshord__choice purshord__choice_bottom">
+            <div class="pchoice-caption">Заполните данные для заказа</div>
+            <div class="pchoice-input">
+              <input class="pchoice-input__text success-element-input" id="name-input" placeholder="Ваше имя"
+                     type="text" #inputName
+                     [(ngModel)]="formValues.name"/>
+              @if (formValues.err_name) {
+                <div class="error-input">Необходимо ввести Ваше имя...</div>
+              }
+            </div>
+            <div class="pchoice-input">
+              <input class="pchoice-input__text success-element-input" id="phone-input"
+                     placeholder="+375 (__) ___ - __ - __" type="text" #inputPhone
+                     [(ngModel)]="formValues.phone"/>
+              @if (formValues.err_phone) {
+              <div class="error-input">Необходимо ввести телефон...</div>
+              }
+            </div>
+            <div class="pchoice-input pchoice-input__btn">
+              <button type="button" class="pchoice-input__botton"
+                      (click)="createOrder(choiceMacaroon,inputName,inputPhone)">Оформить заказ
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="pimageleft__icon">
+          <img alt="left_icon" class="pimageleft__iconimg" src="./images/picon_left.png"/>
+        </div>
+        <div class="pimageright__icon">
+          <img alt="right_icon" class="pimageright__iconimg" src="./images/picon_right.png"/>
+        </div>
+      }
+
+      @if (formValues.popup_show) {
+        <div class="purshase__order">
+          <div class="purshord__title">Спасибо за заказ!</div>
+          <div class="pchoice-caption">Мы скоро свяжемся с Вами.</div>
+        </div>
+      }
     </div>
+
   </section>
 
   <footer class="block  block_footer">
     <div class="footer-container">
-      <div class="logo footer-logo"><img alt="logo" class="logo__img" src="images/logo.png"/></div>
+      <div class="logo footer-logo"><img alt="logo" class="logo__img" src="./images/logo.png"/></div>
       <div class="logo__copyright">Все права защищены, 2020</div>
       <div class="footer-instagram">
         <div class="instagram__logo">
-          <img alt="instagram" class="instagram__logo__img" src="images/instagram.png"/>
+          <img alt="instagram" class="instagram__logo__img" src="./images/instagram.png"/>
         </div>
       </div>
       <div class="instagram__text"><a class="footer-instagram__link" href="#">Мы в Instagram</a></div>
@@ -195,19 +216,18 @@
     </div>
 
   </footer>
-</div>
+  @if (showPresent) {
+    <div class="present__image">
+      <img alt="present" class="present__img" src="./images/present.png"/>
 
-  <div *ngIf="showPresent" class="present__image">
-    <img alt="present" class="present__img" src="images/present.png"/>
-
-    <div class="presentdiv__text">
-      <div class="present__base-ramka">
-        <div class="present-ramka__ugol"></div>
+      <div class="presentdiv__text">
+        <div class="present__base-ramka">
+          <div class="present-ramka__ugol"></div>
+        </div>
+        <div class="present__text">Оформите заказ и получите подарок!</div>
       </div>
-      <div class="present__text">Оформите заказ и получите подарок!</div>
     </div>
-  </div>
-
+  }
 
 </div>
 

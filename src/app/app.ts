@@ -1,23 +1,19 @@
-// noinspection JSDeprecatedSymbols
-
-import {Component, signal} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MacaroonType} from './types/macaroon.type';
 import {AdvType} from './types/adv.type';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgOptimizedImage, NgForOf,NgIf, FormsModule],
+  imports: [FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('macaroons');
+  // protected readonly title = signal('macaroons');
 
-  public showPresent: boolean = false;
-  public advantages: AdvType[] = [
+  protected showPresent: boolean = false;
+  protected advantages: AdvType[] = [
     {
       title: 'Лучшие продукты',
       description: 'Мы честно готовим макаруны только из натуральных и качественных продуктов. Мы не используем консерванты, ароматизаторы и красители.'
@@ -36,53 +32,68 @@ export class App {
     },
   ];
 
-  public macaroons: MacaroonType[] = [
-    {image: 'mcr1.png', caption: 'Макарун с малиной', price_kol: 1, price_sum: '1,70 руб' },
-    {image: 'mcr2.png', caption: 'Макарун с манго', price_kol: 1, price_sum:  '1,70 руб'},
-    {image: 'mcr3.png', caption: 'Пирог с ванилью', price_kol: 1, price_sum:  '1,70 руб'},
-    {image: 'mcr4.png', caption: 'Пирог с фисташками', price_kol:1, price_sum:  '1,70 руб'},
+  protected macaroons: MacaroonType[] = [
+    {image: 'mcr1.png', caption: 'Макарун с малиной', price_kol: 1, price_sum: 1.7},
+    {image: 'mcr2.png', caption: 'Макарун с манго', price_kol: 1, price_sum: 1.7},
+    {image: 'mcr3.png', caption: 'Пирог с ванилью', price_kol: 1, price_sum: 1.7},
+    {image: 'mcr4.png', caption: 'Пирог с фисташками', price_kol: 1, price_sum: 1.7},
   ];
 
 
-  public formValues ={
-    productTitle:'', err_choice:false,
-    name:'', err_name:false,
-    phone:'', err_phone:false,
+  protected formValues = {
+    productTitle: '', err_choice: false,
+    name: '', err_name: false,
+    phone: '', err_phone: false,
     is_error: false,
-    form_show:true,
-    popup_show:false
+    form_show: true,
+    popup_show: false
   }
 
-  public scrollTo(target:HTMLElement):void {
+  public scrollTo(target: HTMLElement): void {
     target.scrollIntoView({behavior: "smooth"});
   }
 
-  public choiceMacaroon(mcr:MacaroonType,target:HTMLElement):void {
+  protected choiceMacaroon(mcr: MacaroonType, target: HTMLElement): void {
     this.scrollTo(target);
-    this.formValues.productTitle=mcr.caption.toUpperCase();
+    this.formValues.productTitle = mcr.caption.toUpperCase();
   }
 
-  public createOrder():void {
-    this.formValues.form_show=true;
-    this.formValues.popup_show=false;
-    this.formValues.err_choice=false;
-    this.formValues.err_name=false;
-    this.formValues.err_phone=false;
-    this.formValues.is_error=false;
+  protected createOrder(mcrElm: HTMLInputElement, nameElm: HTMLInputElement, phoneElm: HTMLInputElement): void {
+    mcrElm.classList.remove('error-element-input');
+    mcrElm.classList.add('success-element-input');
+    nameElm.classList.remove('error-element-input');
+    nameElm.classList.add('success-element-input');
+    phoneElm.classList.remove('error-element-input');
+    phoneElm.classList.add('success-element-input');
+    this.formValues.form_show = true;
+    this.formValues.popup_show = false;
+    this.formValues.err_choice = false;
+    this.formValues.err_name = false;
+    this.formValues.err_phone = false;
+    this.formValues.is_error = false;
 
     if (!this.formValues.productTitle) {
-      this.formValues.err_choice=true; this.formValues.is_error=true;
+      this.formValues.err_choice = true;
+      this.formValues.is_error = true;
+      mcrElm.classList.add('error-element-input');
+      mcrElm.classList.remove('success-element-input');
     }
     if (!this.formValues.name) {
-      this.formValues.err_name=true; this.formValues.is_error=true;
+      this.formValues.err_name = true;
+      this.formValues.is_error = true;
+      nameElm.classList.add('error-element-input');
+      nameElm.classList.remove('success-element-input');
     }
     if (!this.formValues.phone) {
-      this.formValues.err_phone=true; this.formValues.is_error=true;
+      this.formValues.err_phone = true;
+      this.formValues.is_error = true;
+      phoneElm.classList.add('error-element-input');
+      phoneElm.classList.remove('success-element-input');
     }
 
     if (!this.formValues.is_error) {
-      this.formValues.form_show=false;
-      this.formValues.popup_show=true;
+      this.formValues.form_show = false;
+      this.formValues.popup_show = true;
     }
   }
 }
