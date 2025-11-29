@@ -5,7 +5,6 @@ import {AdvType} from './types/adv.type';
 import {ProdListService} from './services/prod-list-service';
 import {AdvListService} from './services/adv-list-service';
 import {StrLeftNNPipe} from './pipes/str-left-nn-pipe-pipe';
-import {CurrencyPipe} from './pipes/currency-pipe';
 import {Phone3Pipe} from './pipes/phone3-pipe';
 import {ChoiceProducts} from './components/choice-products/choice-products';
 import {ButtonChoice} from './directives/button-choice';
@@ -14,7 +13,7 @@ import {ProductCard} from './components/product-card/product-card';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, StrLeftNNPipe, CurrencyPipe, Phone3Pipe, ChoiceProducts, ButtonChoice, ProductCard],
+  imports: [FormsModule, StrLeftNNPipe, Phone3Pipe, ChoiceProducts, ButtonChoice, ProductCard],
   providers: [ProdListService,AdvListService],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -63,6 +62,11 @@ ngOnInit() {
     this.formValues.err_name = false;
     this.formValues.err_phone = false;
     this.formValues.is_error = false;
+
+    if (this.trash.count===0) {
+      alert('Выберите хотя бы один товар');
+      this.formValues.is_error = true;
+    }
 
     if (!this.formValues.name) {
       this.formValues.err_name = true;
