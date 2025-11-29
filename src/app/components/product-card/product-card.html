@@ -1,0 +1,22 @@
+<div class="choice-item">
+  <div class="choice-item__img">
+    <img class="choice-item__image" src="./images/{{currentProduct.image}}" alt="Macaroon {{productNumber}}"/>
+  </div>
+  <div class="choice-item__info">
+    <div class="choice-item__caption">{{ currentProduct.caption }}</div>
+    <div class="choice-order">
+      <div class="choice-order__price">
+        <div class="chorder-price__dtl">{{ currentProduct.price_kol.toString() }} шт.</div>
+        <div class="chorder-price__dtl">{{ currentProduct.price_sum | currencyPipe }}</div>
+      </div>
+      <!--      @if (orderElement) {-->
+      <div class="choice-order__action">
+        <button class="button choice-order__action-btn product__btn" ButtonChoice
+                (click)="choiceMacaroon()"> Заказать
+        </button>
+      </div>
+      <!--      }-->
+    </div>
+  </div>
+</div>
+

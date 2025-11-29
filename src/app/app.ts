@@ -1,47 +1,41 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MacaroonType} from './types/macaroon.type';
 import {AdvType} from './types/adv.type';
+import {ProdListService} from './services/prod-list-service';
+import {AdvListService} from './services/adv-list-service';
+import {StrLeftNNPipe} from './pipes/str-left-nn-pipe-pipe';
+import {CurrencyPipe} from './pipes/currency-pipe';
+import {Phone3Pipe} from './pipes/phone3-pipe';
+import {ChoiceProducts} from './components/choice-products/choice-products';
+import {ButtonChoice} from './directives/button-choice';
+import {ChoiceItogService} from './services/choice-itog-service';
+import {ProductCard} from './components/product-card/product-card';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, StrLeftNNPipe, CurrencyPipe, Phone3Pipe, ChoiceProducts, ButtonChoice, ProductCard],
+  providers: [ProdListService,AdvListService],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  // protected readonly title = signal('macaroons');
+export class App implements OnInit {
 
-  protected showPresent: boolean = false;
-  protected advantages: AdvType[] = [
-    {
-      title: 'Лучшие продукты',
-      description: 'Мы честно готовим макаруны только из натуральных и качественных продуктов. Мы не используем консерванты, ароматизаторы и красители.'
-    },
-    {
-      title: 'Много вкусов',
-      description: 'Наша задача – предоставить вам широкое разнобразие вкусов. Вы удивитесь, но у нас более 70 вкусов пироженок.'
-    },
-    {
-      title: 'Бисквитное тесто',
-      description: 'Все пирожные готовятся на бисквитном тесте с качественным сливочным маслом 82,5%. В составе нет маргарина и дрожжей!'
-    },
-    {
-      title: 'Честный продукт',
-      description: 'Вкус, качество и безопасность наших пирогов подтверждена декларацией о соответствии, которую мы получили 22.06.2016 г.'
-    },
-  ];
+  protected advantages: AdvType[] = [];
+  protected macaroons: MacaroonType[] =[];
+  protected phonePlaceHolder:string='375293689868';
 
-  protected macaroons: MacaroonType[] = [
-    {image: 'mcr1.png', caption: 'Макарун с малиной', price_kol: 1, price_sum: 1.7},
-    {image: 'mcr2.png', caption: 'Макарун с манго', price_kol: 1, price_sum: 1.7},
-    {image: 'mcr3.png', caption: 'Пирог с ванилью', price_kol: 1, price_sum: 1.7},
-    {image: 'mcr4.png', caption: 'Пирог с фисташками', price_kol: 1, price_sum: 1.7},
-  ];
+  constructor(private prodList: ProdListService, private advTypes:AdvListService, public trash:ChoiceItogService) {
+  }
 
+ngOnInit() {
+    this.macaroons=this.prodList.getMacaroons();
+    this.advantages=this.advTypes.getAdvantages();
+}
 
   protected formValues = {
-    productTitle: '', err_choice: false,
+    // productTitle: '',
+    err_choice: false,
     name: '', err_name: false,
     phone: '', err_phone: false,
     is_error: false,
@@ -53,14 +47,12 @@ export class App {
     target.scrollIntoView({behavior: "smooth"});
   }
 
-  protected choiceMacaroon(mcr: MacaroonType, target: HTMLElement): void {
-    this.scrollTo(target);
-    this.formValues.productTitle = mcr.caption.toUpperCase();
+  public addToCart(product:string):void {
+    alert(product+' добавлен в корзину');
   }
 
-  protected createOrder(mcrElm: HTMLInputElement, nameElm: HTMLInputElement, phoneElm: HTMLInputElement): void {
-    mcrElm.classList.remove('error-element-input');
-    mcrElm.classList.add('success-element-input');
+
+  protected createOrder(nameElm: HTMLInputElement, phoneElm: HTMLInputElement): void {
     nameElm.classList.remove('error-element-input');
     nameElm.classList.add('success-element-input');
     phoneElm.classList.remove('error-element-input');
@@ -72,12 +64,6 @@ export class App {
     this.formValues.err_phone = false;
     this.formValues.is_error = false;
 
-    if (!this.formValues.productTitle) {
-      this.formValues.err_choice = true;
-      this.formValues.is_error = true;
-      mcrElm.classList.add('error-element-input');
-      mcrElm.classList.remove('success-element-input');
-    }
     if (!this.formValues.name) {
       this.formValues.err_name = true;
       this.formValues.is_error = true;

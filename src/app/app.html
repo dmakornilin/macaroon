@@ -31,7 +31,7 @@
       </nav>
 
 
-      <div class="header_phone header_phone_top">+375 (29) 368-98-68</div>
+      <div class="header_phone header_phone_top">{{ phonePlaceHolder | phone3 }}</div>
       <div class="header-menutri" id="header-menutri">
         <svg
           height="22px"
@@ -61,7 +61,8 @@
           пироженками Macaroon!
         </div>
         <div class="block_pink__choicebtn">
-          <button class="button blockpinkchoice__button" (click)="scrollTo(menuChoice)">Выбрать макарун</button>
+          <button class="button blockpinkchoice__button" ButtonChoice (click)="scrollTo(menuChoice)">Выбрать макарун
+          </button>
         </div>
       </div>
 
@@ -95,7 +96,7 @@
             <div class="advnumber_circle__number">{{ $index + 1 }}</div>
           </div>
           <div class="advnumber_circle__caption">{{ adv.title }}</div>
-          <div class="advnumber_circle__text">{{ adv.description }}
+          <div class="advnumber_circle__text">{{ adv.description | strLeftNNPipe:95 }}
           </div>
         </div>
       </div>
@@ -106,28 +107,8 @@
     <div class="choice-container">
       <div class="choice-container__title">Выберите свой макарун</div>
       <div class="choice-itemslist">
-
-        @for (mcr of macaroons; track $index) {
-          <div class="choice-item">
-            <div class="choice-item__img">
-              <img class="choice-item__image" src="./images/{{mcr.image}}" alt="Macaroon {{$index+1}}"/>
-            </div>
-            <div class="choice-item__info">
-              <div class="choice-item__caption">{{ mcr.caption }}</div>
-              <div class="choice-order">
-                <div class="choice-order__price ">
-                  <div class="chorder-price__dtl">{{ mcr.price_kol.toString() }} шт.</div>
-                  <div class="chorder-price__dtl">{{ mcr.price_sum.toFixed(2).replace('.', ',') }} руб.</div>
-                </div>
-                <div class="choice-order__action">
-                  <button class="button choice-order__action-btn product__btn"
-                          (click)="choiceMacaroon(mcr,orderElement)">
-                    Заказать
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+      @for (mcr of macaroons; track $index) {
+          <product-card [currentProduct]="mcr"  (ppChoice)="addToCart($event)" [orderElement]=orderElement [productNumber]="$index+1"></product-card>
         }
       </div>
     </div>
@@ -149,15 +130,6 @@
             пекаря!
           </div>
           <div class="purshord__choice">
-            <div class="pchoice-caption">Ваш выбор</div>
-            <div class="pchoice-input">
-              <input class="pchoice-input__text success-element-input" placeholder="Напишите, что хотите заказать..."
-                     #choiceMacaroon
-                     type="text" [(ngModel)]="formValues.productTitle"/>
-              @if (formValues.err_name) {
-                <div class="error-input">Необходимо ввести выбранный макарун...</div>
-              }
-            </div>
           </div>
           <div class="purshord__choice purshord__choice_bottom">
             <div class="pchoice-caption">Заполните данные для заказа</div>
@@ -171,15 +143,15 @@
             </div>
             <div class="pchoice-input">
               <input class="pchoice-input__text success-element-input" id="phone-input"
-                     placeholder="+375 (__) ___ - __ - __" type="text" #inputPhone
+                     placeholder='Введите номер телефона...' type="text" #inputPhone
                      [(ngModel)]="formValues.phone"/>
               @if (formValues.err_phone) {
-              <div class="error-input">Необходимо ввести телефон...</div>
+                <div class="error-input">Необходимо ввести телефон...</div>
               }
             </div>
             <div class="pchoice-input pchoice-input__btn">
-              <button type="button" class="pchoice-input__botton"
-                      (click)="createOrder(choiceMacaroon,inputName,inputPhone)">Оформить заказ
+              <button type="button" class="pchoice-input__botton" ButtonChoice
+                      (click)="createOrder(inputName,inputPhone)">Оформить заказ
               </button>
             </div>
           </div>
@@ -212,29 +184,11 @@
         </div>
       </div>
       <div class="instagram__text"><a class="footer-instagram__link" href="#">Мы в Instagram</a></div>
-      <div class="header_phone footer-phone">+375 (29) 368-98-68</div>
+      <div class="header_phone footer-phone">{{ phonePlaceHolder | phone3 }}</div>
     </div>
-
   </footer>
-  @if (showPresent) {
-    <div class="present__image">
-      <img alt="present" class="present__img" src="./images/present.png"/>
 
-      <div class="presentdiv__text">
-        <div class="present__base-ramka">
-          <div class="present-ramka__ugol"></div>
-        </div>
-        <div class="present__text">Оформите заказ и получите подарок!</div>
-      </div>
-    </div>
-  }
+  <choice-products></choice-products>
 
 </div>
-
-
-<!--<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
-<!--<script src="node_modules/jquery/dist/jquery.js"></script>-->
-<!--<script src="node_modules/jquery/dist/jquery.slim.js"></script>-->
-<!--<script src="scripts/jquery-3.7.1.js"></script>-->
-<!--<script src="scripts/script.js"></script>-->
 
