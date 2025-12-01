@@ -1,33 +1,34 @@
-import {Directive, ElementRef, HostBinding, HostListener, Renderer2, OnInit} from '@angular/core';
+import {Directive, ElementRef, HostBinding, HostListener, Renderer2, OnInit, Input} from '@angular/core';
 
 @Directive({
   selector: '[ButtonChoice]'
 })
 export class ButtonChoice implements OnInit {
-  private coolInputDefault: string ='1px 5px 9px 1px transparent';
-  private coolFocusDefaultBgColor: string ='1px 5px 9px 1px rgba(130, 19, 40, 0.5)';
-  private defaultBgImage: string ='linear-gradient(90deg, rgb(113, 8, 30) 0%, rgb(215, 72, 92) 100%)';
+  public coolInputDefault: string ='1px 5px 9px 1px transparent';
+  public coolFocusDefaultBgColor: string ='1px 5px 9px 1px rgba(130, 19, 40, 0.5)';
+
+  @Input('myBgNotFocus') myBgNotFocus:string='rgb(205,215,72)';
+  @Input('myBgOnFocus') myBgOnFocus:string = 'rgb(183,70,93)';
 
   constructor(private el: ElementRef,private rend: Renderer2) {
 
   }
 
   ngOnInit() {
-    this.rend.setStyle(this.el.nativeElement,'background-image',this.defaultBgImage);
+    this.rend.setStyle(this.el.nativeElement,'background-color',this.myBgNotFocus);
   }
 
   @HostListener('mouseover')
   onMouseOver() {
     this.rend.setStyle(this.el.nativeElement,'box-shadow',this.coolFocusDefaultBgColor);
-   // console.log('mouseenter');
-// alert('поймал');
-//     this.rend.setStyle(this.el.nativeElement,'backgroundColor','orange');
+    this.rend.setStyle(this.el.nativeElement,'background-color',this.myBgOnFocus);
     this._isOnFocus = true;
   }
 
   @HostListener('mouseout')
   onMouseOut() {
     this.rend.setStyle(this.el.nativeElement,'box-shadow',this.coolInputDefault);
+    this.rend.setStyle(this.el.nativeElement,'background-color',this.myBgNotFocus);
     this._isOnFocus = false;
   }
 

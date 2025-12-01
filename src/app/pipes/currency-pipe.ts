@@ -1,12 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'currencyPipe'
+  name: 'currencyPipeRub'
 })
-export class CurrencyPipe implements PipeTransform {
+export class CurrencyPipeRub implements PipeTransform {
 
-  transform(value: number): string {
-    return value.toFixed(2).replace('.',',') +' руб.' ;
+  transform(value: string  | null): string | null  {
+    if (value) {
+      return value.replace(',','.').replace('₽', 'руб.');
+    } else return value;
   }
 
 }

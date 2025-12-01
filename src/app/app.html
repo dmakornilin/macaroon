@@ -61,7 +61,9 @@
           пироженками Macaroon!
         </div>
         <div class="block_pink__choicebtn">
-          <button class="button blockpinkchoice__button" ButtonChoice (click)="scrollTo(menuChoice)">Выбрать макарун
+          <button class="button blockpinkchoice__button"
+                  ButtonChoice myBgNotFocus='rgb(215, 72, 92)' myBgOnFocus="rgb(113, 8, 30)"
+                  (click)="scrollTo(menuChoice)">Выбрать макарун
           </button>
         </div>
       </div>
@@ -150,8 +152,9 @@
               }
             </div>
             <div class="pchoice-input pchoice-input__btn">
-              <button type="button" class="pchoice-input__botton" ButtonChoice
-                      (click)="createOrder(inputName,inputPhone)">Оформить заказ
+              <button type="button" class="pchoice-input__botton"
+                   ButtonChoice myBgNotFocus='rgb(215, 72, 92)' myBgOnFocus="rgb(113, 8, 30)"
+                   (click)="createOrder(inputName,inputPhone)">Оформить заказ
               </button>
             </div>
           </div>

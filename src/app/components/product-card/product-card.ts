@@ -1,16 +1,19 @@
 import {Component, Input,EventEmitter, Output} from '@angular/core';
 import {ButtonChoice} from "../../directives/button-choice";
-import {CurrencyPipe} from "../../pipes/currency-pipe";
 import {MacaroonType} from '../../types/macaroon.type';
 import {ChoiceItogService} from '../../services/choice-itog-service';
+import {CurrencyPipe} from '@angular/common';
+import {CurrencyPipeRub} from '../../pipes/currency-pipe';
 
 
 @Component({
   selector: 'product-card',
-    imports: [
-        ButtonChoice,
-        CurrencyPipe
-    ],
+  imports: [
+    ButtonChoice,
+    CurrencyPipe,
+    CurrencyPipe,
+    CurrencyPipeRub
+  ],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
 })
