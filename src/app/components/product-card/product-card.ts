@@ -3,16 +3,13 @@ import {ButtonChoice} from "../../directives/button-choice";
 import {MacaroonType} from '../../types/macaroon.type';
 import {ChoiceItogService} from '../../services/choice-itog-service';
 import {CurrencyPipe} from '@angular/common';
-import {CurrencyPipeRub} from '../../pipes/currency-pipe';
 
 
 @Component({
   selector: 'product-card',
   imports: [
     ButtonChoice,
-    CurrencyPipe,
-    CurrencyPipe,
-    CurrencyPipeRub
+    CurrencyPipe
   ],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
